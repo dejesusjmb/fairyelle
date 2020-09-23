@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Vapers World</title>
+    {% include 'html_dependencies.html' %}
+</head>
+<body>
+    <!-- Navbar` -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <div class="container">
+
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" href="/">
+                <strong class="blue-text">VapersWorld</strong>
+            </a>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link waves-effect" href="/">Products
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/"
+                           target="_blank">About us</a>
+                    </li>
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="{{ url_for('orders.checkout') }}">
+                            <span class="badge red z-depth-1 mr-1"> 1 </span>
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://www.instagram.com/vapersw0rld/" class="nav-link waves-effect"
+                           target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://shopee.ph/fairyelle" class="nav-link waves-effect"
+                           target="_blank">
+                            <i class="fab fa-shopify"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link border border-light rounded waves-effect"
+                           target="_blank">
+                            <i class="fas fa-phone mr-2"></i>09161234567
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- Navbar -->
+    {% block content %}
+    {% endblock content %}
+
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+        <!--Copyright-->
+        <div class="footer-copyright py-3">
+            <p>Age restriction: we do not sale to minors. It is strictly prohibited for any person under
+                the age of 21 to access, use, and purchase from our website.</p>
+            © 2019 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+        </div>
+        <!--/.Copyright-->
+    </footer>
+    <script type="text/javascript">new WOW().init();</script>
+</body>
+</html>
