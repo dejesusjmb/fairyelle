@@ -22,3 +22,7 @@ header,
     height: 100vh;
   }
 }
+
+.pt-3-half {
+padding-top: 1.4rem;
+}

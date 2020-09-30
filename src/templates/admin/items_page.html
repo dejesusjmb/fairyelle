@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <main>
+        <h1 class="text-center pt-4">Items page</h1>
+        <div class="w-responsive mx-auto pb-5 pr-5 pl-5">
+            <!-- Editable table -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Edit/Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>
+                            <a href="{{ url_for('items.display_item', item_id=item._id) }}">
+                                <img src="{{ item['image_url'] }}"
+                                     alt="" class="img-fluid z-depth-0">
+                            </a>
+                        </td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.category }}</td>
+                        <td>
+                            <a class="btn btn-warning waves-effect btn-sm" href="{{ url_for('items.edit_item', item_id=item._id) }}"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger waves-effect btn-sm" href="{{ url_for('items.delete_item', item_id=item._id) }}"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a class="btn btn-success waves-effect btn-sm" href="{{ url_for('items.add_item') }}"><i class="fas fa-plus-circle"></i> Add item</a>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main>
+    <div class="container wow fadeIn w-responsive mx-auto my-5">
+        <div class="row">
+            <div class="col text-center">
+                <h4 class="mb-3">
+                    <span class="text-muted">Thank You For Your Purchase</span>
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- Cart -->
+                <ul class="list-group mb-3 z-depth-1">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Name</span>
+                        {{ customer['name'] }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Contact Number</span>
+                        {{ customer['contact_number'] }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Shipping Address</span>
+                        {{ customer['address'] }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Landmarks</span>
+                        {{ customer['landmarks'] }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Notes</span>
+                        {{ order['notes'] }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center mb-3">
+                    <span class="text-muted">Order Summary</span>
+                </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="list-group mb-3 z-depth-1">
+                    {% for item in items %}
+                    <li class="list-group-item lh-condensed">
+                        <a href="{{ url_for('items.display_item', item_id=item._id) }}">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="my-0">{{ item['subcategory'] }}: {{ item['name']
+                                        }}</h6>
+                                    <small class="text-muted">{{ item['quantity'] }} x {{
+                                        item['price'] }} each</small>
+                                </div>
+                                <span class="text-muted">₱{{ item['subtotal'] }}</span>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total</span>
+                        <strong>₱{{ order['total_price'] }}</strong>
+                    </li>
+                </ul>
+
+                <div class="text-center">
+                    Please save the link as a reference to your order.
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

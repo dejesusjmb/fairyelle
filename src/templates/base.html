@@ -10,12 +10,12 @@
 </head>
 <body>
     <!-- Navbar` -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color unique-color-dark scrolling-navbar">
         <div class="container">
 
             <!-- Brand -->
             <a class="navbar-brand waves-effect" href="/">
-                <strong class="blue-text">VapersWorld</strong>
+                <strong class="white-text">VapersWorld</strong>
             </a>
 
             <!-- Collapse -->
@@ -31,22 +31,35 @@
 
                 <!-- Left -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link waves-effect" href="/">Products
-                            <span class="sr-only">(current)</span>
-                        </a>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="{{ url_for('items.display_items_by_category', category='Devices') }}">Devices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/"
-                           target="_blank">About us</a>
+                        <a class="nav-link waves-effect" href="{{ url_for('items.display_items_by_category', category='E-Liquid') }}">E-Liquids</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="{{ url_for('items.display_items_by_category', category='Accessories') }}">Accessories</a>
                     </li>
                 </ul>
 
                 <!-- Right -->
-                <ul class="navbar-nav nav-flex-icons">
+                <ul class="navbar-nav {{ 'nav-flex-icons' if session['email'] not in config.ADMINS }}">
+                    {% if session['email'] in config.ADMINS %}
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('orders.checkout') }}">
-                            <span class="badge red z-depth-1 mr-1"> 1 </span>
+                        <a class="nav-link waves-effect" href="{{ url_for('orders.order_summary') }}">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="{{ url_for('items.items_page') }}">Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="{{ url_for('admin.logout_admin') }}">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="{{ url_for('orders.cart') }}">
+                            <span class="badge red z-depth-1 mr-1">{{ session['number_of_items_in_cart'] }}</span>
                             <i class="fas fa-shopping-cart"></i>
                             <span class="clearfix d-none d-sm-inline-block"> Cart </span>
                         </a>
@@ -69,23 +82,24 @@
                             <i class="fas fa-phone mr-2"></i>09161234567
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
 
             </div>
 
         </div>
     </nav>
+    <p class="mt-4 pt-4"></p>
     <!-- Navbar -->
     {% block content %}
     {% endblock content %}
 
-    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+    <footer class="text-center font-small mt-4 mdb-color unique-color-dark white-text wow fadeIn">
         <!--Copyright-->
         <div class="footer-copyright py-3">
             <p>Age restriction: we do not sale to minors. It is strictly prohibited for any person under
                 the age of 21 to access, use, and purchase from our website.</p>
-            © 2019 Copyright:
-            <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+            © 2019 Copyright
         </div>
         <!--/.Copyright-->
     </footer>

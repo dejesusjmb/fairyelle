@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <main>
+        <form class="w-responsive mx-auto p-5" action="{{ url_for('items.edit_item', item_id=item._id) }}" method="post">
+            <p class="text-center h4 mb-4">Edit Item</p>
+            <div class="md-form">
+                <label for="name" class="active">Name</label>
+                <input type="text" id="name" class="form-control mb-4" name="name" value="{{ item.name }}">
+            </div>
+            <div class="md-form">
+                <label for="price" class="active">Price</label>
+                <input type="text" id="price" class="form-control mb-4" name="price" value="{{ item.price }}">
+            </div>
+            <div class="md-form">
+                <label for="description" class="active">Description</label>
+                <input type="text" id="description" class="form-control mb-4" name="description" value="{{ item.description }}">
+            </div>
+            <div class="md-form">
+                <label for="image_url" class="active">Image URL</label>
+                <input type="text" id="image_url" class="form-control mb-4" name="image_url" value="{{ item.image_url }}">
+            </div>
+            <div class="md-form">
+                <label for="category" class="active">Category</label>
+                <input type="text" id="category" class="form-control mb-4" name="category" value="{{ item.category }}">
+            </div>
+            <button class="btn btn-info btn-block my-4 w-50" type="submit">Edit Item</button>
+        </form>
+    </main>
+{% endblock %}
