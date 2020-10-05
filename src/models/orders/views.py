@@ -50,7 +50,7 @@ def edit_cart():
     return redirect(request.referrer)
 
 
-@order_blueprint.route('/cart', methods=['GET', 'POST'])
+@order_blueprint.route('/cart')
 def cart():
     items = []
     total = 0
@@ -75,12 +75,14 @@ def checkout():
         landmarks = request.form['landmarks']
         notes = request.form['notes']
         total_price = request.form['total']
+        delivery = request.form['delivery']
 
         customer = Customer(name, contact_number, address, landmarks)
         customer.save_to_mongo()
 
-        order = Order(customer._id, items, total_price, notes)
+        order = Order(customer._id, items, total_price, delivery, notes)
         order.save_to_mongo()
+        order.send_notification()
 
         initialize_cart()
 
@@ -101,19 +103,27 @@ def checkout():
 
 @order_blueprint.route('/acknowledge')
 def acknowledge_order():
-    order_id = request.args['order_id']
-    order = Order.find_by_id(order_id)
-    items = order.get_items()
-    customer = Customer.find_by_id(order.customer_id)
-    return render_template('acknowledge.html',
-                           order=order.json(),
-                           items=items,
-                           customer=customer.json())
+    order = Order.find_by_id(request.args['order_id'])
+    return render_template('acknowledge.html', order=order.summary)
 
 
 @order_blueprint.route('/summary')
 @admin_decorators.requires_admin_permissions
 def order_summary():
-    # user = User.find_by_email(session['email'])
-    # alerts = user.get_alerts()
-    return render_template('admin/summary.html')
+    status = request.args['status']
+    orders = Order.get_orders(status=status)
+    orders = [order.summary for order in orders]
+    return render_template('admin/summary.html', orders=orders)
+
+
+@order_blueprint.route('/edit_status')
+@admin_decorators.requires_admin_permissions
+def edit_order_status():
+    status = request.args['status']
+    order_id = request.args['order_id']
+
+    order = Order.find_by_id(order_id=order_id)
+    order.status = status
+    order.save_to_mongo()
+
+    return redirect(request.referrer)

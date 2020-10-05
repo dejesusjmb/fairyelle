@@ -13,8 +13,6 @@ def init_db():
 
 @app.route('/')
 def home():
-    # del session['cart']
-    # del session['number_of_items_in_cart']
     return render_template('home.html')
 
 

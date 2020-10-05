@@ -37,5 +37,10 @@ class Item(object):
         return [Item(**item) for item in Database.find(ItemConstants.COLLECTION,
                                                        {'category': category})]
 
+    @staticmethod
+    def find_by_subcategory(subcategory):
+        return [Item(**item) for item in Database.find(ItemConstants.COLLECTION,
+                                                       {'subcategory': subcategory})]
+
     def delete(self):
         Database.remove(ItemConstants.COLLECTION, {'_id': self._id})

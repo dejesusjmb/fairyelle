@@ -8,6 +8,9 @@
                 <h4 class="mb-3">
                     <span class="text-muted">Thank You For Your Purchase</span>
                 </h4>
+                <div class="text-muted mb-3">
+                    We will contact you in a moment. Please save the link as a reference to your order.
+                </div>
             </div>
         </div>
         <div class="row">
@@ -16,23 +19,31 @@
                 <ul class="list-group mb-3 z-depth-1">
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Name</span>
-                        {{ customer['name'] }}
+                        {{ order['customer_name'] }}
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Contact Number</span>
-                        {{ customer['contact_number'] }}
+                        {{ order['customer_contact_number'] }}
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Shipping Address</span>
-                        {{ customer['address'] }}
+                        {{ order['customer_address'] }}
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Landmarks</span>
-                        {{ customer['landmarks'] }}
+                        {{ order['customer_landmarks'] }}
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Notes</span>
-                        {{ order['notes'] }}
+                        {{ order['order_notes'] }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Delivery Type</span>
+                        {{ order['order_delivery'] }}
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Timestamp</span>
+                        {{ order['order_ordered_at'] }}
                     </li>
                 </ul>
             </div>
@@ -47,7 +58,7 @@
         <div class="row">
             <div class="col">
                 <ul class="list-group mb-3 z-depth-1">
-                    {% for item in items %}
+                    {% for item in order['items'] %}
                     <li class="list-group-item lh-condensed">
                         <a href="{{ url_for('items.display_item', item_id=item._id) }}">
                             <div class="d-flex justify-content-between">
@@ -64,13 +75,9 @@
                     {% endfor %}
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total</span>
-                        <strong>₱{{ order['total_price'] }}</strong>
+                        <strong>₱{{ order['order_total_price'] }}</strong>
                     </li>
                 </ul>
-
-                <div class="text-center">
-                    Please save the link as a reference to your order.
-                </div>
             </div>
         </div>
     </div>

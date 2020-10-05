@@ -2,7 +2,7 @@
 {% block content %}
 
 <!--Carousel Wrapper-->
-<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
 
     <!--Indicators-->
     <ol class="carousel-indicators">
@@ -21,7 +21,7 @@
                  style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%282%29.jpg'); background-repeat: no-repeat; background-size: cover;">
 
                 <!-- Mask & flexbox options-->
-                <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-center">
+                <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 
                     <!-- Content -->
                     <div class="text-center white-text mx-5 wow fadeIn">
@@ -61,7 +61,7 @@
                  style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%283%29.jpg'); background-repeat: no-repeat; background-size: cover;">
 
                 <!-- Mask & flexbox options-->
-                <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-center">
+                <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 
                     <!-- Content -->
                     <div class="text-center white-text mx-5 wow fadeIn">
@@ -101,7 +101,7 @@
                  style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%285%29.jpg'); background-repeat: no-repeat; background-size: cover;">
 
                 <!-- Mask & flexbox options-->
-                <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-center">
+                <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 
                     <!-- Content -->
                     <div class="text-center white-text mx-5 wow fadeIn">
@@ -161,9 +161,9 @@
         <section class="dark-grey-text text-center">
 
             <!-- Section heading -->
-            <h3 class="font-weight-bold mb-4 pb-2">Our Products</h3>
+            <h3 class="font-weight-bold mb-4 pb-2 wow fadeIn">Our Products</h3>
             <!-- Section description -->
-            <p class="grey-text w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur
+            <p class="grey-text w-responsive mx-auto mb-5 wow fadeIn">Lorem ipsum dolor sit amet, consectetur
                 adipisicing elit fugit, error amet numquam iure provident voluptate esse quasi
                 nostrum quisquam eum porro a pariatur veniam.</p>
 
@@ -171,19 +171,19 @@
             <div class="row">
 
                 <!-- Grid column -->
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 col-6 mb-4 wow fadeIn">
                     <!-- Collection card -->
                     <div class="card collection-card z-depth-1-half">
                         <!-- Card image -->
                         <div class="view zoom">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/5.jpg"
+                            <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t1.15752-9/119918978_646487189619342_4793131193187567545_n.jpg?_nc_cat=106&_nc_sid=ae9488&_nc_eui2=AeERioQeOuBa5ALfL664qkvhsS6Q-OdMXiixLpD450xeKK0l6saYNw5tsjIzNZhIt8vKjyOYmLCTFywums7HgmpI&_nc_ohc=woAqos3ppssAX99zJKJ&_nc_ht=scontent-hkt1-1.xx&oh=77e4b4b7cb765da94fa154630d74330a&oe=5F9CD086"
                                  class="img-fluid"
                                  alt="">
 
-                            <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-end">
+                            <div class="mask rgba-black-light d-flex justify-content-center align-items-end">
                                 <!-- Content -->
-                                <div class="text-center white-text pb-5 wow fadeIn">
-                                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
+                                <div class="text-center white-text pb-5">
+                                    <a href="{{ url_for('items.display_items_by_category', category='Devices') }}"
                                        class="btn btn-outline-white btn-lg">Starter Kits
                                     </a>
                                 </div>
@@ -198,18 +198,18 @@
                 <!-- Grid column -->
 
                 <!-- Grid column -->
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 col-6 mb-4 wow fadeIn">
                     <!-- Collection card -->
                     <div class="card collection-card z-depth-1-half">
                         <!-- Card image -->
                         <div class="view zoom">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/8.jpg"
+                            <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t1.15752-9/119918978_646487189619342_4793131193187567545_n.jpg?_nc_cat=106&_nc_sid=ae9488&_nc_eui2=AeERioQeOuBa5ALfL664qkvhsS6Q-OdMXiixLpD450xeKK0l6saYNw5tsjIzNZhIt8vKjyOYmLCTFywums7HgmpI&_nc_ohc=woAqos3ppssAX99zJKJ&_nc_ht=scontent-hkt1-1.xx&oh=77e4b4b7cb765da94fa154630d74330a&oe=5F9CD086"
                                  class="img-fluid"
                                  alt="">
-                            <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-end">
+                            <div class="mask rgba-black-light d-flex justify-content-center align-items-end">
                                 <!-- Content -->
-                                <div class="text-center white-text pb-5 wow fadeIn">
-                                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
+                                <div class="text-center white-text pb-5">
+                                    <a href="{{ url_for('items.display_items_by_category', category='E-Liquid') }}"
                                        class="btn btn-outline-white btn-lg">3-in-1 Pods
                                     </a>
                                 </div>
@@ -224,18 +224,18 @@
                 <!-- Grid column -->
 
                 <!-- Grid column -->
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 col-6 mb-4 wow fadeIn">
                     <!-- Collection card -->
                     <div class="card collection-card z-depth-1-half">
                         <!-- Card image -->
                         <div class="view zoom">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/9.jpg"
+                            <img src="https://scontent-hkt1-1.xx.fbcdn.net/v/t1.15752-9/119918978_646487189619342_4793131193187567545_n.jpg?_nc_cat=106&_nc_sid=ae9488&_nc_eui2=AeERioQeOuBa5ALfL664qkvhsS6Q-OdMXiixLpD450xeKK0l6saYNw5tsjIzNZhIt8vKjyOYmLCTFywums7HgmpI&_nc_ohc=woAqos3ppssAX99zJKJ&_nc_ht=scontent-hkt1-1.xx&oh=77e4b4b7cb765da94fa154630d74330a&oe=5F9CD086"
                                  class="img-fluid"
                                  alt="">
-                            <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-end">
+                            <div class="mask rgba-black-light d-flex justify-content-center align-items-end">
                                 <!-- Content -->
-                                <div class="text-center white-text pb-5 wow fadeIn">
-                                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
+                                <div class="text-center white-text pb-5">
+                                    <a href="{{ url_for('items.display_items_by_category', category='Accessories') }}"
                                        class="btn btn-outline-white btn-lg">Silicon Case
                                     </a>
                                 </div>
@@ -250,18 +250,18 @@
                 <!-- Grid column -->
 
                 <!-- Fourth column -->
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 col-6 mb-4 wow fadeIn">
                     <!-- Collection card -->
                     <div class="card collection-card z-depth-1-half">
                         <!-- Card image -->
                         <div class="view zoom">
-                            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/7.jpg"
+                            <img src="https://lh3.googleusercontent.com/pw/ACtC-3dRkrYqMPwEFgHV-A3w7-Mo_N0xBJRyXaL34ESTTrbEx0mZ1wfieS2pl1i8h99igBXqHpNDy-4GrgJcbvzPg0a5JSVGgab3ANOo_hrEcrsLLPFuUVLRztf-qaTBfjB3UJ2wxxZXXVQQGrpeFK2d1Is=w441-h637-no?authuser=0"
                                  class="img-fluid"
                                  alt="">
-                            <div class="mask rgba-stylish-strong d-flex justify-content-center align-items-end">
+                            <div class="mask rgba-black-light d-flex justify-content-center align-items-end">
                                 <!-- Content -->
-                                <div class="text-center white-text pb-5 wow fadeIn">
-                                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/"
+                                <div class="text-center white-text pb-5">
+                                    <a href="{{ url_for('items.display_items_by_category', category='Accessories') }}"
                                        class="btn btn-outline-white btn-lg">Leather Case
                                     </a>
                                 </div>

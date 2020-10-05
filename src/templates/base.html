@@ -5,104 +5,150 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Vapers World</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="date=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="format-detection" content="email=no">
+    <title>Vapers World PH</title>
     {% include 'html_dependencies.html' %}
 </head>
 <body>
-    <!-- Navbar` -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color unique-color-dark scrolling-navbar">
-        <div class="container">
+<!-- Navbar` -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark mdb-color elegant-color-dark scrolling-navbar">
+    <div class="container">
 
-            <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="/">
-                <strong class="white-text">VapersWorld</strong>
-            </a>
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect" href="/">
+            <img src="https://scontent.fmnl17-2.fna.fbcdn.net/v/t1.15752-9/120502646_4532890256786094_1618542112836605281_n.jpg?_nc_cat=111&_nc_sid=ae9488&_nc_eui2=AeGkxqsZ6MGATPshyUl6oy2D1ssFi4ogljvWywWLiiCWO4SyMFijhjzF9AwE_HwxNd98gchkqXziTnz3lMdysDvg&_nc_ohc=aWRF3h3PGv4AX91wVAq&_nc_ht=scontent.fmnl17-2.fna&oh=2cd67515f2f27d6826384f3235ba60f7&oe=5F9F9C27"
+                 class="img-fluid"
+                 style="max-width:30px">
+        </a>
 
-            <!-- Collapse -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('items.display_items_by_category', category='Devices') }}">Devices</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('items.display_items_by_category', category='E-Liquid') }}">E-Liquids</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('items.display_items_by_category', category='Accessories') }}">Accessories</a>
-                    </li>
-                </ul>
-
-                <!-- Right -->
-                <ul class="navbar-nav {{ 'nav-flex-icons' if session['email'] not in config.ADMINS }}">
-                    {% if session['email'] in config.ADMINS %}
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('orders.order_summary') }}">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('items.items_page') }}">Items</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('admin.logout_admin') }}">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect" href="{{ url_for('orders.cart') }}">
-                            <span class="badge red z-depth-1 mr-1">{{ session['number_of_items_in_cart'] }}</span>
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://www.instagram.com/vapersw0rld/" class="nav-link waves-effect"
-                           target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://shopee.ph/fairyelle" class="nav-link waves-effect"
-                           target="_blank">
-                            <i class="fab fa-shopify"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link border border-light rounded waves-effect"
-                           target="_blank">
-                            <i class="fas fa-phone mr-2"></i>09161234567
-                        </a>
-                    </li>
-                    {% endif %}
-                </ul>
-
-            </div>
+            <!-- Left -->
+            <ul class="navbar-nav mr-auto">
+                {% if session['email'] in config.ADMINS %}
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle waves-effect" id="adminDropdown"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div class="dropdown-menu dropdown-primary mdb-color elegant-color-dark"
+                         aria-labelledby="accessoriesDropdown">
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('orders.order_summary', status='open') }}">Orders</a>
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.items_page') }}">Items</a>
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='Leather Case') }}">Customers</a>
+                    </div>
+                </li>
+                {% endif %}
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle waves-effect" id="devicesDropdown"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Devices</a>
+                    <div class="dropdown-menu dropdown-primary mdb-color elegant-color-dark"
+                         aria-labelledby="devicesDropdown">
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='RELX Starter Kit') }}">RELX
+                            Starter Kits</a>
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='HUUK Starter Kit') }}">HUUK
+                            Starter Kits</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle waves-effect" id="eLiquidsDropdown"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">E-Liquids</a>
+                    <div class="dropdown-menu dropdown-primary mdb-color elegant-color-dark"
+                         aria-labelledby="eLiquidsDropdown">
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='RELX 3-in-1 Pod') }}">RELX
+                            3-in-1 Pods</a>
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='HUUK 3-in-1 Pod') }}">HUUK
+                            3-in-1 Pods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle waves-effect" id="accessoriesDropdown"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Accessories</a>
+                    <div class="dropdown-menu dropdown-primary mdb-color elegant-color-dark"
+                         aria-labelledby="accessoriesDropdown">
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='Silicon Case') }}">Silicon
+                            Case</a>
+                        <a class="waves-effect dropdown-item white-text"
+                           href="{{ url_for('items.display_items_by_subcategory', subcategory='Leather Case') }}">Leather
+                            Case</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown btn-group">
+                    <a class="nav-link dropdown-toggle waves-effect" id="contactUsDropdown"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Inquiries</a>
+                    <div class="dropdown-menu dropdown-primary mdb-color elegant-color-dark"
+                         aria-labelledby="contactUsDropdown">
+                        <a class="waves-effect dropdown-item white-text"
+                           href="tel:+639161234567"><i class="fas fa-phone mr-2"></i>09161234567</a>
+                        <a href="https://www.facebook.com/Vapers-World-111813333985360/"
+                           class="waves-effect dropdown-item white-text"
+                           target="_blank"><i class="fab fa-facebook-f mr-2"></i>Vapers World</a>
+                        <a href="https://www.instagram.com/vapersw0rld/"
+                           class="waves-effect dropdown-item white-text"
+                           target="_blank"><i class="fab fa-instagram mr-2"></i>vapersw0rld</a>
+                        <a href="https://shopee.ph/fairyelle" class="waves-effect dropdown-item white-text"
+                           target="_blank"><i class="fab fa-shopify mr-2"></i>fairyelle</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{{ url_for('orders.cart') }}">
+                        <span class="badge red z-depth-1 mr-1">{{ session['number_of_items_in_cart'] }}</span>
+                        <i class="fas fa-shopping-cart"></i> Cart
+                    </a>
+                </li>
+                {% if session['email'] in config.ADMINS %}
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{{ url_for('admin.logout_admin') }}">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
 
         </div>
-    </nav>
-    <p class="mt-4 pt-4"></p>
-    <!-- Navbar -->
-    {% block content %}
-    {% endblock content %}
 
-    <footer class="text-center font-small mt-4 mdb-color unique-color-dark white-text wow fadeIn">
-        <!--Copyright-->
-        <div class="footer-copyright py-3">
-            <p>Age restriction: we do not sale to minors. It is strictly prohibited for any person under
-                the age of 21 to access, use, and purchase from our website.</p>
-            © 2019 Copyright
-        </div>
-        <!--/.Copyright-->
-    </footer>
-    <script type="text/javascript">new WOW().init();</script>
+    </div>
+</nav>
+<p class="mt-4 pt-4"></p>
+<!-- Navbar -->
+{% block content %}
+{% endblock content %}
+
+<footer class="text-center font-small mt-4 mdb-color elegant-color-dark white-text wow fadeIn">
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+        <p>Age restriction: we do not sale to minors. It is strictly prohibited for any person
+            under
+            the age of 21 to access, use, and purchase from our website.</p>
+        © 2019 Copyright
+    </div>
+    <!--/.Copyright-->
+</footer>
+<script type="text/javascript">new WOW().init();</script>
 </body>
 </html>

@@ -16,7 +16,7 @@ def login_admin():
         try:
             if Admin.is_login_valid(email, password):
                 session['email'] = email
-                return redirect(url_for('orders.order_summary'))
+                return redirect(url_for('orders.order_summary', status='open'))
         except AdminErrors.AdminError as e:
             return e.message
 

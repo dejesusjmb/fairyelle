@@ -23,8 +23,9 @@ def add_item():
         description = request.form['description']
         image_url = request.form['image_url']
         category = request.form['category']
+        subcategory = request.form['subcategory']
 
-        item = Item(name, price, category, description, image_url)
+        item = Item(name, price, category, subcategory, description, image_url)
         item.save_to_mongo()
 
     return render_template('admin/new_item.html')
@@ -39,13 +40,13 @@ def edit_item(item_id):
         price = request.form['price']
         description = request.form['description']
         image_url = request.form['image_url']
-        category = request.form['category']
+        subcategory = request.form['subcategory']
 
         item.name = name
         item.price = price
         item.description = description
         item.image_url = image_url
-        item.category = category
+        item.category = subcategory
         item.save_to_mongo()
         return redirect(url_for('.items_page'))
 
@@ -63,6 +64,12 @@ def delete_item(item_id):
 def display_items_by_category(category):
     items = Item.find_by_category(category)
     return render_template('product_list.html', category=category, items=items)
+
+
+@item_blueprint.route('/subcategory/<string:subcategory>')
+def display_items_by_subcategory(subcategory):
+    items = Item.find_by_subcategory(subcategory)
+    return render_template('product_list.html', category=subcategory, items=items)
 
 
 @item_blueprint.route('/<string:item_id>')

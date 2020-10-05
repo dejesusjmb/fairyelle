@@ -26,3 +26,11 @@ header,
 .pt-3-half {
 padding-top: 1.4rem;
 }
+
+.min-font {
+font-weight: 300;
+}
+
+.navbar .btn-group .dropdown-menu a:hover {
+color: #000 !important;
+}
