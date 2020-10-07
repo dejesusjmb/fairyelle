@@ -47,9 +47,9 @@
                         <a class="waves-effect dropdown-item white-text"
                            href="{{ url_for('orders.order_summary', status='open') }}">Orders</a>
                         <a class="waves-effect dropdown-item white-text"
-                           href="{{ url_for('items.items_page') }}">Items</a>
+                           href="{{ url_for('items.items') }}">Items</a>
                         <a class="waves-effect dropdown-item white-text"
-                           href="{{ url_for('items.display_items_by_subcategory', subcategory='Leather Case') }}">Customers</a>
+                           href="{{ url_for('admin.customers') }}">Customers</a>
                     </div>
                 </li>
                 {% endif %}
@@ -102,15 +102,15 @@
                     <div class="dropdown-menu dropdown-primary mdb-color elegant-color-dark"
                          aria-labelledby="contactUsDropdown">
                         <a class="waves-effect dropdown-item white-text"
-                           href="tel:+639161234567"><i class="fas fa-phone mr-2"></i>09161234567</a>
+                           href="tel:+639161234567"><i class="fas fa-phone-square-alt mr-2"></i>09161234567</a>
                         <a href="https://www.facebook.com/Vapers-World-111813333985360/"
                            class="waves-effect dropdown-item white-text"
-                           target="_blank"><i class="fab fa-facebook-f mr-2"></i>Vapers World</a>
+                           target="_blank"><i class="fab fa-facebook-square mr-2"></i>Facebook</a>
                         <a href="https://www.instagram.com/vapersw0rld/"
                            class="waves-effect dropdown-item white-text"
-                           target="_blank"><i class="fab fa-instagram mr-2"></i>vapersw0rld</a>
+                           target="_blank"><i class="fab fa-instagram mr-2"></i>Instagram</a>
                         <a href="https://shopee.ph/fairyelle" class="waves-effect dropdown-item white-text"
-                           target="_blank"><i class="fab fa-shopify mr-2"></i>fairyelle</a>
+                           target="_blank"><i class="fab fa-shopify mr-2"></i>Shopee</a>
                     </div>
                 </li>
             </ul>
@@ -149,6 +149,7 @@
     </div>
     <!--/.Copyright-->
 </footer>
-<script type="text/javascript">new WOW().init();</script>
+
+{% include 'js_dependencies.html' %}
 </body>
 </html>

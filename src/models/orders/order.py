@@ -121,6 +121,6 @@ class Order(object):
                 "html": message})
 
     @classmethod
-    def get_orders(cls, status=None):
-        query = {'status': status} if status else {}
+    def get_orders(cls, query=None):
+        query = query or {}
         return [cls(**order) for order in Database.find(OrderConstants.COLLECTION, query)]

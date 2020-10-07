@@ -15,3 +15,20 @@
         });
     }, false);
 })();
+
+$(document).ready(function() {
+    $('.mdb-select').materialSelect();
+    $('.datepicker').pickadate({
+        selectYears: 70,
+        max: true,
+        format: 'mmm-dd-yyyy'});
+    $('.datepicker').removeAttr('readonly');
+// Initialize material styling for select dropdown
+//    $('.datepicker').datepicker({ selectYears: 200 });                                             // Initialize datepicker
+//    $('.timepicker').pickatime({ twelvehour: true });
+  // Initialize timepicker
+
+//	$('.datepicker').removeAttr('readonly');
+//    $('.mdb-select.select-wrapper .select-dropdown').val("").removeAttr('readonly').attr("placeholder", "Status").prop('required', true).addClass('form-control');
+
+});

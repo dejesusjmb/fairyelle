@@ -9,9 +9,9 @@ item_blueprint = Blueprint('items',  __name__)
 
 @item_blueprint.route('/')
 @admin_decorators.requires_admin_permissions
-def items_page():
+def items():
     items = [Item(**item) for item in Database.find(ItemConstants.COLLECTION, {})]
-    return render_template('admin/items_page.html', items=items)
+    return render_template('admin/items.html', items=items)
 
 
 @item_blueprint.route('/new', methods=['GET', 'POST'])
@@ -48,7 +48,7 @@ def edit_item(item_id):
         item.image_url = image_url
         item.category = subcategory
         item.save_to_mongo()
-        return redirect(url_for('.items_page'))
+        return redirect(url_for('.items'))
 
     return render_template('admin/edit_item.html', item=item)
 
@@ -57,7 +57,7 @@ def edit_item(item_id):
 @admin_decorators.requires_admin_permissions
 def delete_item(item_id):
     Item.find_by_id(item_id).delete()
-    return redirect(url_for('.items_page'))
+    return redirect(url_for('.items'))
 
 
 @item_blueprint.route('/category/<string:category>')

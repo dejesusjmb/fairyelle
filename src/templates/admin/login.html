@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    <main>
-        <form class="w-responsive mx-auto p-5" action="{{ url_for('admin.login_admin') }}" method="post">
-            <p class="text-center h4 mb-4 my-5">Sign in</p>
+<main class="p-5">
+    <p class="text-center h4 mb-4 my-5">Sign in</p>
+    <form class="w-responsive mx-auto pb-5" action="{{ url_for('admin.login_admin') }}"
+          method="post">
+        <div class="mx-5 text-center">
             <div class="md-form">
                 <label for="email" class="">Email</label>
                 <input type="email" id="email" class="form-control mb-4" name="email">
@@ -11,7 +13,8 @@
                 <label for="password" class="">Password</label>
                 <input type="password" id="password" class="form-control mb-4" name="password">
             </div>
-            <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
-        </form>
-    </main>
+            <button class="btn btn-info my-4 btn-rounded" type="submit">Sign in</button>
+        </div>
+    </form>
+</main>
 {% endblock %}

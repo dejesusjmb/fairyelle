@@ -1,24 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<!--Main layout-->
 <main>
     <div class="container">
-        <h1 class="text-center py-4">{{ category }}</h1>
-        <!--Section: Products v.3-->
+        <h1 class="text-center py-4">{{ category }}s</h1>
         <section class="text-center mb-4">
-
-            <!--Grid row-->
             <div class="row">
-
-                <!--Grid column-->
                 {% for item in items %}
                 <div class="col-lg-3 col-md-3 col-6 mb-4 wow fadeIn">
-
-                    <!--Card-->
-                    <div class="card">
-
-                        <!--Card image-->
-                        <div class="view overlay">
+                    <div class="card card-cascade narrower">
+                        <div class="view view-cascade zoom">
                             <img src="{{ item.image_url }}"
                                  class="card-img-top"
                                  alt="">
@@ -26,38 +16,35 @@
                                 <div class="mask rgba-white-slight"></div>
                             </a>
                         </div>
-                        <!--Card image-->
-                        <!--Card content-->
-                        <div class="card-body text-center">
-                            <!--Category & Title-->
-                            <h6 class="grey-text">{{ item.subcategory }}</h6>
+                        <a class="btn-floating btn-action ml-auto mr-4 mdb-color elegant-color"
+                           href="{{ url_for('items.display_item', item_id=item._id) }}"><i
+                                class="fas fa-chevron-right pl-1"></i></a>
+                        <div class="card-body card-body-cascade text-center my-1">
+                            <h6 class="dark-grey-text min-font">{{ item.subcategory }}</h6>
                             <h6>
                                 <strong>
-                                    <a href="{{ url_for('items.display_item', item_id=item._id) }}"
-                                       class="dark-grey-text">{{ item.name }}
-<!--                                        <br>-->
-<!--                                        <span class="badge badge-pill danger-color">NEW</span>-->
+                                    <a class="text-dark font-weight-bold">{{ item.name }}
                                     </a>
                                 </strong>
                             </h6>
-
-                            <h6 class="font-weight-bold blue-text">
-                                <strong>₱{{ item.price }}</strong>
+                            <h6 class="grey-text min-font">
+                                <strong>₱ {{ item.price }}</strong>
                             </h6>
-
+                            <form method="post" action="{{ url_for('orders.add_to_cart') }}">
+                                <input type="hidden" value="{{ item._id }}" class="form-control"
+                                       name="item_id">
+                                <input type="hidden" value="1" class="form-control"
+                                       name="quantity">
+                                <button type="submit"
+                                        class="btn btn-rounded btn-md mdb-color elegant-color-dark my-auto white-text">
+                                    Add to cart <i class="fas fa-shopping-cart"></i></button>
+                            </form>
                         </div>
-                        <!--Card content-->
-
                     </div>
-                    <!--Card-->
-
                 </div>
-                <!--Grid column-->
                 {% endfor %}
             </div>
-            <!--Grid row-->
         </section>
-        <!--Section: Products v.3-->
     </div>
 </main>
 

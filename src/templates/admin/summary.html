@@ -1,19 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
 <main>
-    <h1 class="text-center pt-4">Orders</h1>
-    <div class="w-responsive mx-auto pb-5 pr-5 pl-5">
+    <div class="w-responsive mx-auto px-5">
+        <h1 class="text-center pt-4">Orders</h1>
         <!-- Material form contact -->
-        <div>
-
+        <div class="card border rounded mb-5">
+            <form class="needs-validation container text-center" action="{{ url_for('orders.order_summary') }}" novalidate>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3 md-form">
+                        <select class="mdb-select pl-1" id="status" name="status" required>
+                            <option value="all" {% if query['status'] == 'all' %} selected="selected" {% endif %}>All</option>
+                            <option value="open" {% if query['status'] == 'open' %} selected="selected" {% endif %}>Open</option>
+                            <option value="completed" {% if query['status'] == 'completed' %} selected="selected" {% endif %}>Completed</option>
+                            <option value="cancelled" {% if query['status'] == 'cancelled' %} selected="selected" {% endif %}>Cancelled</option>
+                        </select>
+                        <label for="status" class="">Status</label>
+                    </div>
+                    <div class="col-md-6 mb-3 md-form">
+                        <select class="mdb-select pl-1" name="delivery" id="delivery" required>
+                            <option value="all" {% if query['delivery'] == 'all' %} selected="selected" {% endif %}>All</option>
+                            <option value="Same Day" {% if query['delivery'] == 'Same Day' %} selected="selected" {% endif %}>Same Day</option>
+                            <option value="Next Day" {% if query['delivery'] == 'Next Day' %} selected="selected" {% endif %}>Next Day</option>
+                        </select>
+                        <label for="delivery" class="">Delivery</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col mb-3 md-form">
+                        <input type="text" id="ordered_at"
+                               class="form-control datepicker" name="ordered_at"
+                               {% if query['ordered_at'] %} value="{{ query['ordered_at'] }}" {% endif %}>
+                        <label for="ordered_at" class="">Order date</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-rounded mb-3" type="submit">Search</button>
+            </form>
         </div>
         <!--Accordion wrapper-->
-        <div class="accordion md-accordion" id="accordionEx" role="tablist"
+        <h1 class="text-center">{{ orders|length }} result(s)</h1>
+        <div class="accordion md-accordion mb-5" id="accordionEx" role="tablist"
              aria-multiselectable="true">
 
             <!-- Accordion card -->
             {% for order in orders %}
-            <div class="card">
+            <div class="card border rounded">
 
                 <!-- Card header -->
                 <div class="card-header" role="tab" id="{{ 'header_' + order['order_id'] }}">
@@ -22,8 +52,20 @@
                        aria-expanded="true"
                        aria-controls="collapseOne1">
                         <h6 class="mb-0 black-text">
-                            {{ order['order_status'].title() }}: {{ order['order_id'] }} <i
-                                class="fas fa-angle-down rotate-icon"></i>
+                            {{ order['order_id'] }}
+                            {% if order['order_status'] == 'cancelled' %}
+                            <span class="badge badge-danger badge-pill mx-1">{{ order['order_status'].title() }}</span>
+                            {% elif order['order_status'] == 'completed' %}
+                            <span class="badge badge-success badge-pill mx-1">{{ order['order_status'].title() }}</span>
+                            {% else %}
+                            <span class="badge badge-warning badge-pill mx-1">{{ order['order_status'].title() }}</span>
+                            {% endif %}
+                            {% if order['order_delivery'] == 'Same Day' %}
+                            <span class="badge badge-light badge-pill">{{ order['order_delivery'] }}</span>
+                            {% else %}
+                            <span class="badge badge-dark badge-pill">{{ order['order_delivery'] }}</span>
+                            {% endif %}
+                            <i class="fas fa-angle-down rotate-icon"></i>
                         </h6>
                     </a>
                 </div>
@@ -96,8 +138,8 @@
                             </table>
                             {% if order['order_status'] == 'open' %}
                             <div class="text-center">
-                                <a class="btn btn-success waves-effect btn-md" href="{{ url_for('orders.edit_order_status', order_id=order['order_id'], status='completed') }}"><i class="fas fa-check-square"></i> Complete</a>
-                                <a class="btn btn-danger waves-effect btn-md" href="{{ url_for('orders.edit_order_status', order_id=order['order_id'], status='cancelled') }}"><i class="fas fa-trash"></i> Cancel</a>
+                                <a class="btn btn-success waves-effect btn-md btn-rounded" href="{{ url_for('orders.edit_order_status', order_id=order['order_id'], status='completed') }}"><i class="fas fa-check-square"></i> Complete</a>
+                                <a class="btn btn-danger waves-effect btn-md btn-rounded" href="{{ url_for('orders.edit_order_status', order_id=order['order_id'], status='cancelled') }}"><i class="fas fa-trash"></i> Cancel</a>
                             </div>
                             {% endif %}
                         </div>

@@ -58,8 +58,8 @@
                         <strong>₱{{ item['subtotal'] }}</strong>
                     </td>
                     <td>
-                        <a class="btn btn-success waves-effect btn-sm" href="{{ url_for('orders.edit_cart', action='add', item_id=item._id) }}"><i class="fas fa-plus-circle"></i></a>
-                        <a class="btn btn-danger waves-effect btn-sm" href="{{ url_for('orders.edit_cart', action='remove', item_id=item._id) }}"><i class="fas fa-minus-circle"></i></a>
+                        <a class="btn btn-success waves-effect btn-floating" href="{{ url_for('orders.edit_cart', action='add', item_id=item._id) }}"><i class="fas fa-plus-circle"></i></a>
+                        <a class="btn btn-danger waves-effect btn-floating" href="{{ url_for('orders.edit_cart', action='remove', item_id=item._id) }}"><i class="fas fa-minus-circle"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -68,7 +68,7 @@
                     <td></td>
                     <td class="font-weight-bold text-right"><strong>Total</strong></td>
                     <td class="font-weight-bold"><strong>₱{{ total }}</strong></td>
-                    <td class=""><a class="btn btn-success waves-effect btn-sm" href="{{ url_for('orders.checkout') }}">Checkout</a></td>
+                    <td class=""><a class="btn btn-success waves-effect btn-md btn-rounded" href="{{ url_for('orders.checkout') }}">Checkout <i class="fas fa-shopping-cart"></i></a></td>
                 </tr>
                 </tbody>
                 <!-- /.Table body -->

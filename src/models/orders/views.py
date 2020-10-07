@@ -1,5 +1,5 @@
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import Blueprint, render_template, redirect, url_for, request, session
 import src.models.admin.decorators as admin_decorators
@@ -71,18 +71,21 @@ def checkout():
         items = session['cart']
         name = request.form['name']
         contact_number = request.form['contactNumber']
+        birthdate = datetime.strptime(request.form['birthdate'], '%b-%d-%Y')
         address = request.form['address']
         landmarks = request.form['landmarks']
         notes = request.form['notes']
         total_price = request.form['total']
         delivery = request.form['delivery']
 
-        customer = Customer(name, contact_number, address, landmarks)
+        customer = Customer(name, contact_number, birthdate, address, landmarks)
+        if not customer.is_in_legal_age():
+            return redirect(url_for('error', error_code=2))
         customer.save_to_mongo()
 
         order = Order(customer._id, items, total_price, delivery, notes)
         order.save_to_mongo()
-        order.send_notification()
+        # order.send_notification()
 
         initialize_cart()
 
@@ -110,10 +113,25 @@ def acknowledge_order():
 @order_blueprint.route('/summary')
 @admin_decorators.requires_admin_permissions
 def order_summary():
-    status = request.args['status']
-    orders = Order.get_orders(status=status)
+    status = request.args.get('status', 'all')
+    delivery = request.args.get('delivery', 'all')
+    ordered_at = request.args.get('ordered_at')
+
+    query = {}
+    if status != 'all':
+        query['status'] = status
+    if delivery != 'all':
+        query['delivery'] = delivery
+    if ordered_at:
+        ordered_at = datetime.strptime(ordered_at, '%b-%d-%Y')
+        next_day = (ordered_at + timedelta(days=1)).date()
+        next_day = datetime(next_day.year, next_day.month, next_day.day)
+        query['ordered_at'] = {'$gte': ordered_at, '$lt': next_day}
+
+    orders = Order.get_orders(query=query)
     orders = [order.summary for order in orders]
-    return render_template('admin/summary.html', orders=orders)
+    query['ordered_at'] = request.args.get('ordered_at')
+    return render_template('admin/summary.html', orders=orders, query=query)
 
 
 @order_blueprint.route('/edit_status')

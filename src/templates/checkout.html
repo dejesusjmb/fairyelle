@@ -81,8 +81,15 @@
 
                         <!--contactNumber-->
                         <div class="md-form mb-5">
-                            <input type="text" id="contactNumber" class="form-control" name="contactNumber" required>
+                            <input type="text" id="contactNumber" class="form-control"
+                                   name="contactNumber" required>
                             <label for="contactNumber" class="">Contact Number</label>
+                        </div>
+
+                        <div class="md-form mb-5">
+                            <input type="text" id="birthdate" class="form-control datepicker"
+                                   name="birthdate" required>
+                            <label for="birthdate">Date of Birth</label>
                         </div>
 
                         <!--address-->
@@ -112,7 +119,7 @@
                                     delivery</label>
                             </div>
 
-                            <div class="form-check custom-control-inline">
+                            <div class="form-check custom-control-inline mb-4">
                                 <input class="form-check-input" name="delivery" type="radio"
                                        id="next_day" value="Next Day">
                                 <label class="form-check-label" for="next_day">Next day delivery
@@ -129,7 +136,11 @@
                         </div>
                         <input type="hidden" value="{{ total }}" class="form-control" name="total">
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block min-font" type="submit">Submit Order</button>
+                        {% if session['number_of_items_in_cart'] == 0 %}
+                        <button class="btn btn-primary btn-lg btn-block min-font btn-rounded" type="submit" disabled>Submit Order</button>
+                        {% else %}
+                        <button class="btn btn-primary btn-lg btn-block min-font btn-rounded" type="submit">Submit Order</button>
+                        {% endif %}
                     </form>
                 </div>
                 <!--/.Card-->
