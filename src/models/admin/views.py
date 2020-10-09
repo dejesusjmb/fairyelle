@@ -2,12 +2,10 @@ from datetime import datetime, timedelta
 
 from flask import Blueprint, request, session, url_for, render_template, redirect
 
-from src.common.database import Database
 from src.models.admin.admin import Admin
 from src.models.customers.customer import Customer
 import src.models.admin.errors as AdminErrors
 import src.models.admin.decorators as admin_decorators
-import src.models.customers.constants as CustomerConstants
 
 admin_blueprint = Blueprint('admin', __name__)
 # There is only one admin for now and that is the admin.

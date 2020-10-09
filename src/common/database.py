@@ -1,14 +1,16 @@
+import os
+
 import pymongo
 
 
 class Database(object):
-    URI = 'mongodb://127.0.0.1:27017'
+    URI = os.environ.get('DATABASE_URI')
     DATABASE = None
 
     @staticmethod
     def initialize():
         client = pymongo.MongoClient(Database.URI)
-        Database.DATABASE = client['vapersworld']
+        Database.DATABASE = client[os.environ.get('DATABASE_COLLECTION_NAME')]
 
     @staticmethod
     def insert(collection, data):

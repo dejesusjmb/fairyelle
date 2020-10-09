@@ -7,7 +7,7 @@ import src.models.items.constants as ItemConstants
 class Item(object):
     def __init__(self, name, price, category, subcategory, description, image_url, _id=None):
         self.name = name
-        self.price = price
+        self.price = int(price)
         self.description = description
         self.image_url = image_url
         self.category = category

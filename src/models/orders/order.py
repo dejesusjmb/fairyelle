@@ -1,3 +1,4 @@
+import os
 import uuid
 from datetime import datetime
 
@@ -14,7 +15,7 @@ class Order(object):
                  notes=None, status='open', ordered_at=datetime.now(), _id=None):
         self.customer_id = customer_id
         self.items = items
-        self.total_price = total_price
+        self.total_price = int(total_price)
         self.delivery = delivery
         self.notes = notes
         self.status = status
@@ -78,8 +79,8 @@ class Order(object):
 
         rows = ('<tr><td style="width: 180px;"><strong>Order Id</strong></td>'
                 '<td style="width: 372px;">'
-                '<a href="http://127.0.0.1:4990/orders/acknowledge?order_id={order_id}">{order_id}'
-                '</a></td></tr>').format(order_id=self._id)
+                '<a href="{base_url}/orders/acknowledge?order_id={order_id}">{order_id}'
+                '</a></td></tr>').format(order_id=self._id, base_url=os.environ.get('BASE_URL'))
         row = ('<tr><td style="width: 180px;"><strong>{key}</strong></td>'
                '<td style="width: 372px;">{value}</td></tr>')
         fields = ['customer_name', 'customer_contact_number', 'customer_address',
@@ -112,11 +113,11 @@ class Order(object):
         message = order_table + '<p>&nbsp;</p><hr /><p>&nbsp;</p>' + items_table
 
         requests.post(
-            "https://api.mailgun.net/v3/sandbox5593ce651a4c452bb25f4ef1512c934b.mailgun.org/messages",
-            auth=("api", "key-b41cc766321f03b2c117b8eaa910016b"),
+            os.environ.get('MAILGUN_API'),
+            auth=("api", os.environ.get('MAILGUN_API_KEY')),
             data={
-                "from": "New Order <mailgun@sandbox5593ce651a4c452bb25f4ef1512c934b.mailgun.org>",
-                "to": ["vapersworldph@gmail.com"],
+                "from": "New Order <{}>".format(os.environ.get('SANDBOX_DOMAIN')),
+                "to": [os.environ.get('ADMIN_EMAIL')],
                 "subject": "Order {}".format(self._id),
                 "html": message})
 

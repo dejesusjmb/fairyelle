@@ -1,9 +1,17 @@
+import os
+from collections import defaultdict
+
 from flask import Flask, render_template, session, request
 from src.common.database import Database
 
 app = Flask(__name__)
 app.config.from_object('src.config')
-app.secret_key = '123'
+app.secret_key = os.environ.get('APP_SECRET_KEY')
+
+
+def initialize_cart():
+    session['cart'] = defaultdict(int)
+    session['number_of_items_in_cart'] = 0
 
 
 @app.before_first_request
@@ -13,6 +21,9 @@ def init_db():
 
 @app.route('/')
 def home():
+    if 'cart' not in session or 'number_of_items_in_cart' not in session:
+        initialize_cart()
+
     return render_template('home.html')
 
 

@@ -20,9 +20,6 @@ def add_to_cart():
     item_id = request.form['item_id']
     quantity = int(request.form['quantity'])
 
-    if 'cart' not in session:
-        initialize_cart()
-
     if item_id in session['cart']:
         session['cart'][item_id] += quantity
     else:
@@ -58,7 +55,7 @@ def cart():
     for item_id, quantity in session['cart'].items():
         item = Item.find_by_id(item_id)
         item_details = item.json()
-        item_details['subtotal'] = quantity * item.price
+        item_details['subtotal'] = quantity * item_details['price']
         items.append(item_details)
         total += item_details['subtotal']
 
@@ -85,7 +82,7 @@ def checkout():
 
         order = Order(customer._id, items, total_price, delivery, notes)
         order.save_to_mongo()
-        # order.send_notification()
+        order.send_notification()
 
         initialize_cart()
 
@@ -97,7 +94,7 @@ def checkout():
     for item_id, quantity in session['cart'].items():
         item = Item.find_by_id(item_id)
         item_details = item.json()
-        item_details['subtotal'] = quantity * item.price
+        item_details['subtotal'] = quantity * item_details['price']
         items.append(item_details)
         total += item_details['subtotal']
 
