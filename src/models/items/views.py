@@ -43,7 +43,7 @@ def edit_item(item_id):
         subcategory = request.form['subcategory']
 
         item.name = name
-        item.price = price
+        item.price = int(price)
         item.description = description
         item.image_url = image_url
         item.category = subcategory
