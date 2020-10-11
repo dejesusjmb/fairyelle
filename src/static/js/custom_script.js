@@ -10,6 +10,9 @@
                     event.preventDefault();
                     event.stopPropagation();
                 }
+                else {
+                    $('.submit-disabled').prop('disabled', true);
+                }
                 form.classList.add('was-validated');
             }, false);
         });
@@ -23,7 +26,7 @@ $(document).ready(function() {
         max: true,
         format: 'mmm-dd-yyyy'});
     $('.datepicker').removeAttr('readonly');
-    $('.submit-disabled').click(function(){
+    $('.click-disabled').click(function(){
        $(this).prop('disabled', true);
     });
 });
