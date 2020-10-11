@@ -26,7 +26,4 @@ $(document).ready(function() {
         max: true,
         format: 'mmm-dd-yyyy'});
     $('.datepicker').removeAttr('readonly');
-    $('.click-disabled').click(function(){
-       $(this).prop('disabled', true);
-    });
 });
