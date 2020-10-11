@@ -55,7 +55,7 @@ padding-top: 1.4rem;
 font-weight: 300 !important;
 }
 
-.navbar .btn-group .dropdown-menu .dropdown-item:hover {
+.dropdown-item:hover {
 color: #000 !important;
 background-color: #fff !important;
 }

@@ -23,12 +23,7 @@ $(document).ready(function() {
         max: true,
         format: 'mmm-dd-yyyy'});
     $('.datepicker').removeAttr('readonly');
-// Initialize material styling for select dropdown
-//    $('.datepicker').datepicker({ selectYears: 200 });                                             // Initialize datepicker
-//    $('.timepicker').pickatime({ twelvehour: true });
-  // Initialize timepicker
-
-//	$('.datepicker').removeAttr('readonly');
-//    $('.mdb-select.select-wrapper .select-dropdown').val("").removeAttr('readonly').attr("placeholder", "Status").prop('required', true).addClass('form-control');
-
+    $('.submit-disabled').click(function(){
+       $(this).prop('disabled', true);
+    });
 });
